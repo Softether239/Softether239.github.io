@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Портфолио — Марсель Дусметов</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <button id="theme-toggle" class="theme-btn" aria-label="Переключить тему">🌙 Тёмная тема</button>
+    <h1>Марсель Дусметов</h1>
+    <h2>Специалист по внедрению CRM</h2>
+  </header>
+
+  <main>
+    <section>
+      <h3>О себе</h3>
+      <img class="profile-pic" src="naRezume.jpg" alt="Аватар Марселя Дусметова">
+      <p>
+        Студент 2 курса УГНТУ (направление «Прикладная информатика в экономике и финансах ТЭК»). 
+        Развиваюсь в сфере внедрения CRM-систем и автоматизации бизнес-процессов. 
+        Благодаря пониманию экономики предприятий и навыкам веб-разработки (HTML, CSS, JS), 
+        умею не просто настраивать базовые инструменты, но и связывать сайты с мессенджерами 
+        и системами учета для быстрой обработки заявок.
+      </p>
+    </section>
+
+    <section>
+      <h3>Навыки</h3>
+      <ul>
+        <li>Базовая настройка CRM</li>
+        <li>Интеграция сайтов и мессенджеров</li>
+        <li>HTML5 и CSS3</li>
+        <li>JavaScript (ES6+)</li>
+        <li>Работа с Git</li>
+        <li>Основы адаптивной вёрстки</li>
+        <li>Базовое понимание React</li>
+        <li>Анализ бизнес-процессов</li>
+      </ul>
+   </section>
+
+    <section>
+      <h3>Кейсы и проекты</h3>
+      
+      <article class="case-card">
+       <h4>Разработка лендинга и интеграция с мессенджерами</h4>
+        <p class="case-meta">Инструменты: HTML5, CSS3, JavaScript, WhatsApp, Telegram</p>
+        <p>
+          <strong>Задача:</strong> Создать адаптивную посадочную страницу и настроить быстрый канал связи с потенциальными клиентами.<br>
+          <strong>Результат:</strong> Сверстал сайт с нуля без использования конструкторов, адаптировал под мобильные устройства и подключил прямые виджеты перехода в WhatsApp и Telegram для оперативной обработки обращений.
+        </p>
+      </article>
+
+      <article class="case-card">
+        <h4>Проектирование воронки продаж и сбор заявок (пет-проект)</h4>
+        <p class="case-meta">Инструменты: CRM-система, HTML-формы, Git</p>
+        <p>
+          <strong>Задача:</strong> Отработать полный цикл движения клиента от захода на сайт до фиксации сделки в базе.<br>
+          <strong>Результат:</strong> Спроектировал этапы воронки продаж, настроил карточки клиентов и протестировал передачу заявок с веб-формы в систему учета для исключения потери лидов.
+        </p>
+        </article>
+
+      <article class="case-card">
+        <h4>Разработка интерактивного виджета и сайта-визитки</h4>
+        <p class="case-meta">Инструменты: HTML5, CSS3, JavaScript, Git</p>
+        <p>
+          <strong>Задача:</strong> Создать быструю адаптивную страницу с формой захвата заявок.<br>
+          <strong>Результат:</strong> Сверстал сайт с нуля, настроил валидацию форм на JS и передачу данных напрямую в CRM-систему без использования сторонних конструкторов.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <a href="https://github.com/Softether239" target="_blank" rel="noopener noreferrer">Мой GitHub</a> |
+      <a href="https://t.me/marseldusmetov" target="_blank" rel="noopener noreferrer">Написать в Telegram</a> |
+      <a href="mailto:marseldysmetov2004@gmail.com">Связаться по почте</a>
+    </p>
+    <p>© 2026 Все права защищены</p>
+  </footer>
+
+   <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+
+    // Проверяем сохраненную тему или системные настройки
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      root.setAttribute('data-theme', 'dark');
+      toggleBtn.textContent = '☀️ Светлая тема';
+    }
+
+    // Обработка клика по кнопке
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = root.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        root.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        toggleBtn.textContent = '🌙 Тёмная тема';
+      } else {
+        root.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        toggleBtn.textContent = '☀️ Светлая тема';
+      }
+    });
+  </script>
+
+</body>
+</html>

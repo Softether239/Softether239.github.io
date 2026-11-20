@@ -1,0 +1,211 @@
+/* Цветовая палитра (светлая тема по умолчанию) */
+:root {
+  --bg-page: #f3f4f6;
+  --bg-card: #ffffff;
+  --bg-case: #f9fafb;
+  --text-main: #1f2937;
+  --text-title: #111827;
+  --text-muted: #6b7280;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --tag-bg: #eff6ff;
+  --tag-text: #1d4ed8;
+  --tag-hover: #dbeafe;
+  --border-light: #f3f4f6;
+  --shadow: rgba(0, 0, 0, 0.04);
+}
+
+/* Палитра для тёмной темы */
+[data-theme="dark"] {
+  --bg-page: #0f172a;
+  --bg-card: #1e293b;
+  --bg-case: #0f172a;
+  --text-main: #e2e8f0;
+  --text-title: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --tag-bg: #1e3a8a;
+  --tag-text: #bfdbfe;
+  --tag-hover: #1d4ed8;
+  --border-light: #334155;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Базовые сбросы и настройки */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--bg-page);
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Шапка и кнопка смены темы */
+header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.theme-btn {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-main);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-title);
+  margin-bottom: 6px;
+}
+
+h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Карточки секций */
+section {
+  background-color: var(--bg-card);
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px var(--shadow);
+  margin-bottom: 24px;
+  transition: background-color 0.3s ease;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: var(--text-title);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+/* Фото профиля */
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 20px auto;
+  border: 4px solid var(--tag-bg);
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+/* Список навыков */
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+li {
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+li:hover {
+  background-color: var(--tag-hover);
+  transform: translateY(-2px);
+}
+
+/* Карточки кейсов */
+.case-card {
+  padding: 18px;
+  background-color: var(--bg-case);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.case-card:last-child {
+  margin-bottom: 0;
+}
+
+.case-card h4 {
+  font-size: 1.1rem;
+  color: var(--text-title);
+  margin-bottom: 4px;
+}
+
+.case-meta {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Подвал и ссылки */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+footer p {
+  margin-bottom: 10px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  margin: 0 6px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Адаптация под мобильные экраны */
+@media (max-width: 480px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  section {
+    padding: 20px;
+  }
+}
