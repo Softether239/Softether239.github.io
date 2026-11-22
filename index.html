@@ -71,7 +71,44 @@
         </p>
       </article>
     </section>
-  </main>
+
+  <section id="contact" class="section contact-section">
+  <h2>Оставить заявку или обсудить проект</h2>
+  <p class="section-subtitle">Заявка мгновенно придет мне в Telegram и создаст тестовую сделку в CRM.</p>
+
+  <form id="crm-lead-form" class="card lead-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="lead-name">Ваше имя *</label>
+        <input type="text" id="lead-name" name="name" placeholder="Алексей" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lead-contact">Телефон или Telegram *</label>
+        <input type="text" id="lead-contact" name="contact" placeholder="+7 999 000-00-00 или @username" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lead-service">Интересующая задача</label>
+      <select id="lead-service" name="service">
+        <option value="Внедрение и настройка CRM (Битрикс24 / amoCRM)">Внедрение и настройка CRM (Битрикс24 / amoCRM)</option>
+        <option value="Интеграция сайта с Telegram и CRM">Интеграция сайта с Telegram и CRM</option>
+        <option value="Разработка лендинга / сайта-визитки">Разработка лендинга / сайта-визитки</option>
+        <option value="Предложение о стажировке / сотрудничестве">Предложение о стажировке / сотрудничестве</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="lead-comment">Комментарий</label>
+      <textarea id="lead-comment" name="comment" rows="3" placeholder="Коротко опишите задачу или проект..."></textarea>
+    </div>
+
+    <button type="submit" id="lead-submit" class="btn-primary">Отправить заявку</button>
+    <div id="lead-status" class="form-status" role="status" aria-live="polite"></div>
+  </form>
+</section>
+ </main>
 
   <footer>
     <p>
@@ -106,6 +143,45 @@
         root.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
         toggleBtn.textContent = '☀️ Светлая тема';
+      }
+    });
+
+     // === Отправка формы в Cloudflare Worker ===
+    const WORKER_URL = 'https://portfolio-leads.marseldysmetov2004.workers.dev';
+    const leadForm = document.getElementById('crm-lead-form');
+    const leadStatus = document.getElementById('lead-status');
+    const leadBtn = document.getElementById('lead-submit');
+
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      leadBtn.disabled = true;
+      leadStatus.textContent = '⏳ Отправляем заявку...';
+
+      const payload = {
+        name: leadForm.name.value.trim(),
+        contact: leadForm.contact.value.trim(),
+        service: leadForm.service.value,
+        comment: leadForm.comment.value.trim()
+      };
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+
+        if (res.ok && result.ok) {
+          leadStatus.textContent = '✅ Заявка отправлена! Я получил уведомление в Telegram.';
+          leadForm.reset();
+        } else {
+          leadStatus.textContent = `❌ ${result.error || 'Не удалось отправить заявку'}`;
+        }
+      } catch {
+        leadStatus.textContent = '❌ Ошибка соединения. Проверьте интернет или напишите мне в Telegram.';
+      } finally {
+        leadBtn.disabled = false;
       }
     });
   </script>
