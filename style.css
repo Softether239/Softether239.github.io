@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 /* Цветовая палитра (светлая тема по умолчанию) */
 :root {
   --bg-page: #f3f4f6;
@@ -169,6 +173,12 @@ li:hover {
   font-weight: 600;
   margin-bottom: 10px;
 }
+
+.case-card a {
+  margin: 0;
+  text-decoration: underline;
+}
+
 
 /* Подвал и ссылки */
 footer {
