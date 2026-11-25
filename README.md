@@ -3,6 +3,8 @@
 Адаптивный сайт-портфолио с переключением светлой/тёмной темы и полноценной продакшн-интеграцией формы обратной связи с **Telegram Bot API** и **CRM Битрикс24** через бессерверный прокси на **Vercel Serverless Functions**.
 
 🌐 **Демо сайта:** [https://github.io](https://github.io)
+⚙️ **Серверная часть (Vercel API):** [://github.com](https://portfolio-telegram-api)
+
 
 ---
 
