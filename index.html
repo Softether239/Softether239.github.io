@@ -161,6 +161,16 @@
     const leadBtn = document.getElementById('lead-submit');
     const formLoadedAt = Date.now(); // Запоминаем время загрузки страницы
 
+     // Считываем UTM-метки из URL при загрузке страницы (например, ?utm_source=hh&utm_medium=resume)
+const urlParams = new URLSearchParams(window.location.search);
+const utmData = {
+  utm_source: urlParams.get('utm_source') || '',
+  utm_medium: urlParams.get('utm_medium') || '',
+  utm_campaign: urlParams.get('utm_campaign') || '',
+  utm_content: urlParams.get('utm_content') || '',
+  utm_term: urlParams.get('utm_term') || ''
+};
+
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       leadBtn.disabled = true;
@@ -172,7 +182,8 @@
         service: leadForm.service.value,
         comment: leadForm.comment.value.trim(),
         website: leadForm.website ? leadForm.website.value.trim() : '', // Ловушка
-    elapsedMs: Date.now() - formLoadedAt // Сколько миллисекунд прошло до отправки
+    elapsedMs: Date.now() - formLoadedAt, // Сколько миллисекунд прошло до отправки
+        utm: utmData // Передаём метки на сервер
     };
 
       try {
