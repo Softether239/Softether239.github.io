@@ -105,6 +105,13 @@
       <textarea id="lead-comment" name="comment" rows="3" placeholder="Коротко опишите задачу или проект..."></textarea>
     </div>
 
+    <!-- Невидимое поле-ловушка для ботов -->
+    <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+      <label for="website">Ваш сайт</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+
     <button type="submit" id="lead-submit" class="btn-primary">Отправить заявку</button>
     <div id="lead-status" class="form-status" role="status" aria-live="polite"></div>
   </form>
@@ -147,11 +154,12 @@
       }
     });
 
-     // === Отправка формы в Cloudflare Worker ===
+     // === Отправка формы в Vercel Serverless Functions ===
     const WORKER_URL = 'https://portfolio-telegram-api.vercel.app/api/send';
     const leadForm = document.getElementById('crm-lead-form');
     const leadStatus = document.getElementById('lead-status');
     const leadBtn = document.getElementById('lead-submit');
+    const formLoadedAt = Date.now(); // Запоминаем время загрузки страницы
 
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -163,7 +171,9 @@
         contact: leadForm.contact.value.trim(),
         service: leadForm.service.value,
         comment: leadForm.comment.value.trim()
-      };
+        website: leadForm.website ? leadForm.website.value.trim() : '', // Ловушка
+    elapsedMs: Date.now() - formLoadedAt // Сколько миллисекунд прошло до отправки
+    };
 
       try {
         const res = await fetch(WORKER_URL, {
